@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="UTF-8"><title>Ejercicio 9</title></head>
+<body>
+    <h2>Ejercicio 9: Operaciones Matemáticas</h2>
+    <form action="operaciones-seleccion" method="GET">
+        Número 1: <input type="text" name="num1" required><br><br>
+        Número 2: <input type="text" name="num2" required><br><br>
+
+        <b>Elige las operaciones:</b><br>
+        <label><input type="checkbox" name="operacion" value="suma"> Suma (+)</label><br>
+        <label><input type="checkbox" name="operacion" value="resta"> Resta (−)</label><br>
+        <label><input type="checkbox" name="operacion" value="multiplicacion"> Multiplicación (×)</label><br>
+        <label><input type="checkbox" name="operacion" value="division"> División (÷)</label><br><br>
+
+        <button type="button" onclick="marcar(true)">Marcar todas</button>
+        <button type="button" onclick="marcar(false)">Desmarcar todas</button>
+        <button type="submit">Calcular</button>
+    </form>
+    <br><a href="index.html">Menú</a>
+
+    <script>
+        function marcar(estado) {
+            document.querySelectorAll('input[name="operacion"]').forEach(function (c) { c.checked = estado; });
+        }
+    </script>
+</body>
+</html>

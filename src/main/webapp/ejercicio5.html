@@ -1,0 +1,23 @@
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
+import java.io.*;
+
+public class Ejercicio5Servlet extends HttpServlet {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        String usuario = request.getParameter("usuario");
+        String contrasena = request.getParameter("contrasena");
+
+        boolean sinUsuario = usuario == null || usuario.trim().isEmpty();
+        boolean sinClave = contrasena == null || contrasena.isEmpty();
+        if (sinUsuario && sinClave) {
+            response.sendRedirect("ejercicio5.html");
+            return;
+        }
+
+        String u = sinUsuario ? "(vacío)" : usuario.trim();
+        String clave = sinClave ? "(vacía)" : "*".repeat(contrasena.length());
+        Almacen.guardar("post", "Usuario: " + u + " | Contraseña: " + clave);
+        response.sendRedirect("registros?guardado=post");
+    }
+}

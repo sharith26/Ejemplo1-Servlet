@@ -1,0 +1,22 @@
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
+import java.io.*;
+
+public class Ejercicio4Servlet extends HttpServlet {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String nombre = request.getParameter("nombre");
+        String correo = request.getParameter("correo");
+
+        boolean sinNombre = nombre == null || nombre.trim().isEmpty();
+        boolean sinCorreo = correo == null || correo.trim().isEmpty();
+        if (sinNombre && sinCorreo) {
+            response.sendRedirect("ejercicio4.html");
+            return;
+        }
+
+        String n = sinNombre ? "(vacío)" : nombre.trim();
+        String c = sinCorreo ? "(vacío)" : correo.trim();
+        Almacen.guardar("get", "Nombre: " + n + " | Correo: " + c);
+        response.sendRedirect("registros?guardado=get");
+    }
+}
